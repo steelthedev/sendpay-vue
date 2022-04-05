@@ -81,7 +81,8 @@ export default {
       crypto:'',
       NGN:'',
       errors:'',
-      ngn_rate:''
+      ngn_rate:'',
+
     }
   },
   watch:{
@@ -93,7 +94,7 @@ export default {
 
     crypto(crypto){
       if(crypto.length){
-       this.NGN = (crypto * this.usd) *  576.24 
+       this.NGN = (crypto * this.usd) *  this.ngn_rate
       }
       else if(!crypto.length){
         this.NGN= 0
@@ -102,19 +103,27 @@ export default {
   },
   mounted(){
     this.getBtc()
+    this.getExchange()
   },
   methods: {
-  getBtc(){
-    axios
+  async getBtc(){
+    await axios
     .get('crypto')
     .then(response =>{
       console.log(response.data.prices.USD)
       this.usd = response.data.prices.USD
     })
   },
+
+  async getExchange(){
+    await axios
+    .get('naira')
+    .then(response => {
+        console.log(response.data.rates)
+        this.ngn_rate = response.data.rates.NGN
+    })
+  },
   
-
-
    async verifyAccount(){
        const data={
        account_number:this.account_number,
