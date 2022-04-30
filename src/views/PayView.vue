@@ -6,7 +6,7 @@
   <div class="row justify-content-center">
     <div class="col-md-8 col-lg-5">
       <div class="form mt-5">
-        <form @submit.prevent="">
+        <form @submit.prevent="makePayment">
           <h6>Receipient's Details</h6>
           <div class="form-group mt-3">
             <label for="">Full name</label>
@@ -106,11 +106,31 @@ export default {
     this.getExchange()
   },
   methods: {
-  async getBtc(){
-    await axios
+
+makePayment(){
+    const data = {
+
+      full_name : this.name,
+      email : this.email,
+      btc_amount : this.crypto,
+      btc_in_ngn : this.NGN,
+      bank : this.bank,
+      account_number:this.account_number,
+      account_name:this.account_name
+
+    }
+      axios
+            .post('pay',data)
+            .then(response =>{
+              console.log(response)
+            })
+    },
+
+  getBtc(){
+    axios
     .get('crypto')
     .then(response =>{
-      console.log(response.data.prices.USD)
+      console.log(response.data)
       this.usd = response.data.prices.USD
     })
   },
@@ -142,15 +162,7 @@ export default {
     
    
   },
-  computed:{
-    calculateNGN(){
-     let usd_crypto = this.usd * crypto
 
-      let usd_to_ngn = usd_crypto * 2
-
-      return usd_to_ngn
-    }
-  }
 }
 </script>
 <style scoped>

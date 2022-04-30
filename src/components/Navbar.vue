@@ -2,7 +2,7 @@
    <nav class="navbar navbar-expand-lg fixed-top   p-2">
         
     <div class="container-fluid"> 
-    <router-link to="/" class="navbar-brand p-3" >iPay</router-link>
+    <router-link to="/" class="navbar-brand p-3">iPay</router-link>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="fa fa-bars"></span>
     </button>
@@ -45,7 +45,7 @@ nav a{
 }
 
 .navbar .navbar-brand{
-  font-size: 1.6rem;
+  font-size: 2rem;
 }
 
 nav a:hover{
